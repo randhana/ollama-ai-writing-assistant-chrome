@@ -88,7 +88,7 @@ README.md              # Full documentation
 MANUAL_TESTING.md      # Testing procedures
 ```
 
-## ✅ Verification Checklist
+##  Verification Checklist
 - [ ] Ollama service running (`ollama serve`)
 - [ ] LLaMA 3.2 model installed (`ollama list`)
 - [ ] Extension built successfully (`npm run build`)
