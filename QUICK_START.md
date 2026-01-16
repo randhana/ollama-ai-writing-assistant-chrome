@@ -1,6 +1,6 @@
 # AI Writing Assistant - Quick Start Guide
 
-## 🎯 Installation & Setup
+## Installation & Setup
 
 ### 1. Prerequisites
 Before you begin, make sure you have:
@@ -46,7 +46,7 @@ npm run build
 4. Click "Test Connection" - should show "Connected"
 5. Configure your preferred tone and settings
 
-## 🚀 Usage
+## Usage
 
 ### Real-time Suggestions
 - Start typing in any text field on any website
@@ -72,7 +72,7 @@ npm run build
 - Ensure text is at least 10 characters
 - Check if LLaMA 3.2 model is properly installed
 
-## 📁 Project Structure
+## Project Structure
 ```
 dist/                    # Built extension (load this in Chrome)
 ├── background/          # Service worker
@@ -97,7 +97,7 @@ MANUAL_TESTING.md      # Testing procedures
 - [ ] Real-time suggestions work on test website
 - [ ] Popup analysis works
 
-## 🎉 You're Ready!
+## You're Ready!
 The AI Writing Assistant is now ready to help improve your writing across the web. For detailed documentation, see [README.md](README.md).
 
 ---
