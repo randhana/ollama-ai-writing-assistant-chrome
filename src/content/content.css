@@ -1,0 +1,106 @@
+/* Content script styles for AI Writing Assistant */
+
+.writing-assistant-has-suggestions {
+  border: 2px solid #3b82f6 !important;
+  border-radius: 4px !important;
+}
+
+.writing-assistant-indicator {
+  position: absolute !important;
+  top: 2px !important;
+  right: 2px !important;
+  background: #3b82f6 !important;
+  color: white !important;
+  border-radius: 50% !important;
+  width: 16px !important;
+  height: 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 10px !important;
+  cursor: pointer !important;
+  z-index: 10000 !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  transition: all 0.2s ease !important;
+}
+
+.writing-assistant-indicator:hover {
+  background: #2563eb !important;
+  transform: scale(1.1) !important;
+}
+
+.writing-assistant-tooltip {
+  position: absolute !important;
+  background: white !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 8px !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+  padding: 12px !important;
+  max-width: 300px !important;
+  z-index: 10001 !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-size: 13px !important;
+  line-height: 1.4 !important;
+  display: none !important;
+}
+
+.writing-assistant-suggestion {
+  margin-bottom: 4px !important;
+  padding: 6px 8px !important;
+  background: #f9fafb !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  transition: background-color 0.2s ease !important;
+  border: 1px solid transparent !important;
+}
+
+.writing-assistant-suggestion:hover {
+  background: #e5e7eb !important;
+  border-color: #d1d5db !important;
+}
+
+.writing-assistant-suggestion:last-child {
+  margin-bottom: 0 !important;
+}
+
+.writing-assistant-highlight {
+  background: rgba(59, 130, 246, 0.1) !important;
+  border-bottom: 2px solid #3b82f6 !important;
+  cursor: pointer !important;
+}
+
+.writing-assistant-highlight:hover {
+  background: rgba(59, 130, 246, 0.2) !important;
+}
+
+/* Animation for suggestion appearance */
+@keyframes writing-assistant-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.writing-assistant-tooltip {
+  animation: writing-assistant-fade-in 0.2s ease-out !important;
+}
+
+/* Ensure tooltip is above all other elements */
+.writing-assistant-tooltip * {
+  box-sizing: border-box !important;
+}
+
+/* Style for paraphrased suggestions */
+.writing-assistant-paraphrased {
+  background: #f0f9ff !important;
+  border: 1px solid #bae6fd !important;
+}
+
+.writing-assistant-paraphrased:hover {
+  background: #e0f2fe !important;
+  border-color: #7dd3fc !important;
+}

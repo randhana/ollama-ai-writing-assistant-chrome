@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Writing Assistant - Settings</title>
+    <link href="options.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-4xl mx-auto py-8 px-4">
+        <!-- Header -->
+        <header class="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
+            <div class="px-6 py-4">
+                <h1 class="text-2xl font-bold text-gray-900">AI Writing Assistant Settings</h1>
+                <p class="text-gray-600 mt-1">Configure your AI-powered writing assistant</p>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Main Settings -->
+            <div class="lg:col-span-2 space-y-6">
+                <!-- API Configuration -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h2 class="text-lg font-semibold text-gray-900">Ollama API Configuration</h2>
+                        <p class="text-sm text-gray-600">Configure connection to your local Ollama instance</p>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div>
+                            <label for="apiUrl" class="block text-sm font-medium text-gray-700 mb-2">
+                                API URL
+                            </label>
+                            <input 
+                                type="url" 
+                                id="apiUrl" 
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                placeholder="http://localhost:11434"
+                                value="http://localhost:11434"
+                            >
+                            <p class="mt-1 text-xs text-gray-500">Default Ollama API endpoint</p>
+                        </div>
+                        
+                        <div class="flex items-center space-x-3">
+                            <button 
+                                id="testConnection" 
+                                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+                            >
+                                Test Connection
+                            </button>
+                            <div id="connectionStatus" class="flex items-center text-sm">
+                                <div id="connectionIndicator" class="w-2 h-2 rounded-full mr-2"></div>
+                                <span id="connectionText">Not tested</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Writing Preferences -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h2 class="text-lg font-semibold text-gray-900">Writing Preferences</h2>
+                        <p class="text-sm text-gray-600">Customize how the assistant analyzes your text</p>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div>
+                            <label for="defaultTone" class="block text-sm font-medium text-gray-700 mb-2">
+                                Default Writing Tone
+                            </label>
+                            <select 
+                                id="defaultTone" 
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            >
+                                <option value="professional">Professional</option>
+                                <option value="casual">Casual</option>
+                                <option value="friendly">Friendly</option>
+                                <option value="persuasive">Persuasive</option>
+                                <option value="academic">Academic</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="suggestionFrequency" class="block text-sm font-medium text-gray-700 mb-2">
+                                Suggestion Frequency
+                            </label>
+                            <select 
+                                id="suggestionFrequency" 
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            >
+                                <option value="low">Low - Minimal suggestions</option>
+                                <option value="medium">Medium - Balanced suggestions</option>
+                                <option value="high">High - Comprehensive analysis</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="debounceTime" class="block text-sm font-medium text-gray-700 mb-2">
+                                Analysis Delay (milliseconds)
+                            </label>
+                            <input 
+                                type="range" 
+                                id="debounceTime" 
+                                min="500" 
+                                max="5000" 
+                                step="100" 
+                                value="1500"
+                                class="w-full"
+                            >
+                            <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                <span>Fast (500ms)</span>
+                                <span id="debounceValue">1500ms</span>
+                                <span>Slow (5s)</span>
+                            </div>
+                            <p class="mt-1 text-xs text-gray-500">How long to wait after typing before analyzing text</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature Toggles -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h2 class="text-lg font-semibold text-gray-900">Features</h2>
+                        <p class="text-sm text-gray-600">Enable or disable specific features</p>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-sm font-medium text-gray-900">Real-time Suggestions</h3>
+                                <p class="text-xs text-gray-500">Analyze text as you type</p>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="enableRealTime" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-sm font-medium text-gray-900">Auto-complete</h3>
+                                <p class="text-xs text-gray-500">Suggest word and sentence completions</p>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="enableAutoComplete" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-sm font-medium text-gray-900">Extension Enabled</h3>
+                                <p class="text-xs text-gray-500">Master toggle for all features</p>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="extensionEnabled" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Management -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h2 class="text-lg font-semibold text-gray-900">Data Management</h2>
+                        <p class="text-sm text-gray-600">Manage cached data and privacy settings</p>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-sm font-medium text-gray-900">Cache Status</h3>
+                                <p class="text-xs text-gray-500" id="cacheInfo">Calculating cache size...</p>
+                            </div>
+                            <button 
+                                id="clearCache" 
+                                class="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-50 transition-colors"
+                            >
+                                Clear Cache
+                            </button>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-sm font-medium text-gray-900">Error Logs</h3>
+                                <p class="text-xs text-gray-500" id="logsInfo">Loading logs info...</p>
+                            </div>
+                            <div class="space-x-2">
+                                <button 
+                                    id="viewLogs" 
+                                    class="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-50 transition-colors"
+                                >
+                                    View Logs
+                                </button>
+                                <button 
+                                    id="clearLogs" 
+                                    class="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-50 transition-colors"
+                                >
+                                    Clear Logs
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="space-y-6">
+                <!-- Status Panel -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                    <div class="px-4 py-3 border-b border-gray-200">
+                        <h3 class="text-sm font-semibold text-gray-900">System Status</h3>
+                    </div>
+                    <div class="p-4 space-y-3">
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-600">Extension</span>
+                            <span id="extensionStatus" class="font-medium">Active</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-600">API Connection</span>
+                            <span id="apiStatus" class="font-medium">Unknown</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-600">Model</span>
+                            <span class="font-medium">LLaMA 3.2</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                    <div class="px-4 py-3 border-b border-gray-200">
+                        <h3 class="text-sm font-semibold text-gray-900">Quick Actions</h3>
+                    </div>
+                    <div class="p-4 space-y-2">
+                        <button 
+                            id="exportSettings" 
+                            class="w-full px-3 py-2 text-sm text-left hover:bg-gray-50 rounded transition-colors"
+                        >
+                            Export Settings
+                        </button>
+                        <button 
+                            id="importSettings" 
+                            class="w-full px-3 py-2 text-sm text-left hover:bg-gray-50 rounded transition-colors"
+                        >
+                            Import Settings
+                        </button>
+                        <button 
+                            id="resetSettings" 
+                            class="w-full px-3 py-2 text-sm text-left hover:bg-red-50 text-red-600 rounded transition-colors"
+                        >
+                            Reset to Defaults
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Help & Support -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                    <div class="px-4 py-3 border-b border-gray-200">
+                        <h3 class="text-sm font-semibold text-gray-900">Help & Support</h3>
+                    </div>
+                    <div class="p-4 space-y-2">
+                        <button class="w-full px-3 py-2 text-sm text-left hover:bg-gray-50 rounded transition-colors">
+                            View Documentation
+                        </button>
+                        <button class="w-full px-3 py-2 text-sm text-left hover:bg-gray-50 rounded transition-colors">
+                            Report Issue
+                        </button>
+                        <button class="w-full px-3 py-2 text-sm text-left hover:bg-gray-50 rounded transition-colors">
+                            Keyboard Shortcuts
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Save Actions -->
+        <div class="mt-8 flex items-center justify-between bg-white rounded-lg shadow-sm border border-gray-200 px-6 py-4">
+            <div class="text-sm text-gray-600">
+                <span id="saveStatus">All changes saved automatically</span>
+            </div>
+            <div class="space-x-3">
+                <button 
+                    id="cancelChanges" 
+                    class="px-4 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                >
+                    Cancel
+                </button>
+                <button 
+                    id="saveSettings" 
+                    class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+                >
+                    Save Changes
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="logsModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-96">
+            <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+                <h3 class="text-lg font-semibold text-gray-900">Error Logs</h3>
+                <button id="closeLogsModal" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="p-6 max-h-80 overflow-y-auto">
+                <pre id="logsContent" class="text-sm bg-gray-100 p-4 rounded font-mono"></pre>
+            </div>
+        </div>
+    </div>
+
+    <input type="file" id="importFile" accept=".json" class="hidden">
+
+    <script src="options.js"></script>
+</body>
+</html>
